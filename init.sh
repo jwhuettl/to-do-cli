@@ -15,6 +15,6 @@ echo {"tasks":[]} > list.json
 # easier -- but mostly cause i'm lazy af
 
 #
-#  echo "alias todo='~/Projects/to-do/to-do.sh'" > /home/.bashrc
+#  echo "alias todo='PATH/TO/to-do.sh" > /home/.bashrc
 #
 #

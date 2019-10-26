@@ -1,102 +1,85 @@
-// testing for to-do
 
 const fs = require('fs');
-var list = []; // list for json
-var list_copy = {"tasks":[]}; // copy for clean
+var list = [];
+var list_copy = {"tasks":[]}; 
 
+// filepath for list.json
+var file_path;
+
+
+// helper functions
 function readList() {
-  // reads + parses json file
-  json_list = fs.readFileSync('list.json');
+  // reads + parses json list
+  json_list = fs.readFileSync(file_path);
   list = JSON.parse(json_list);
+} // read list
 
-  return list;
-} // readFile
-
-function writeList(list) {
-  // writes json file
+function writeList() {
+  // writes to json file
   json_list = JSON.stringify(list);
-  fs.writeFileSync('list.json', json_list);
-
-  return 0;
+  fs.writeFileSync(file_path, json_list);
 } // writeList
 
+// basic functions
 function addTask(task) {
   // adds task to list
-  if (list.tasks.push({name: task, done: false})) {
-    return 0;
-  }
-  else {
-    return 1;
-  }
+  list.tasks.push({name: task, done: false});
+  writeList(list);
 } // addTask
-
-function cleanList() {
-  // removes done tasks from list
-
-  for (var i = 1; i < list.tasks.length; i++) {
-    if (list.tasks[i].done == false) {
-      list_copy.tasks.push(list.tasks[i]);
-    }
-  }
-  list = list_copy;
-
-  return 0;
-} // cleanList
 
 function doneTask(task) {
   // marks task as done
-
-  for (var i = 0; i < list.tasks.length; i++) {
-    if (list.tasks[i].name == task) {
-      list.tasks[i].done = true;
-      return 0;
+  list.tasks.forEach(element => {
+    if (element.name == task) {
+      element.done = true;
     }
-  }
-  return 1;
-}
+  });
 
-function showList(list) {
-  // prints out list
+  writeList(list);
+} // doneTask
+
+function cleanList() {
+  // removes completed tasks from list
+
+  list.tasks.forEach(element => {
+    if (element.done == false) {
+      list_copy.tasks.push(element);
+    }
+  });
+  list = list_copy;
+  writeList(list);
+} // cleanList
+
+function showList() {
+  // prints out entire list
 
   console.log('[to-do list]');
-
-  for (var i = 0; i < list.tasks.length; i++) {
-    console.log(list.tasks[i].name, '\t\t', list.tasks[i].done);
-  }
-  return 0;
+  list.tasks.forEach(element => {
+    console.log("%s\t\t\t\t%s", element.name, element.done);
+  });
 } // showList
 
+
 function main() {
-  args = process.argv.slice(2); // getting args from to-do
-  
+  args = process.argv.slice(2);
 
-  list = readList(); // reading files
+  file_path = args[0]; // getting json list file path
 
-  switch (args[0]) {
+  readList();
+
+  switch (args[1]) {
     case 'add':
-      ret = addTask(args[1]);
-      writeList(list);
+      addTask(args[2]);
       break;
     case 'clean':
-      cleanList();
-      writeList(list);
-      ret = 0;
+      cleanList(args[2]);
       break;
     case 'done':
-      ret = doneTask(args[1]);
-      writeList(list);
+      doneTask(args[2]);
       break;
     case 'show':
-      showList(list);
-      ret = 0;
+      showList();
       break;
-    default:
-      ret = 1;
-  } // switch
-
-  
-  if (ret == 1) {
-    console.log("there was an error: %s %s", args[0], args[1]);
   }
 } // main
 

@@ -1,5 +1,14 @@
 #!/bin/bash
 
+  # some configuration stuff
+
+  # this is the path to the javascript script
+  # eventually I would like to move this to a config file 
+  # default values or if no config file (./main.js and ./list.json)
+  JS_FILE_PATH="/home/$USER/to-do-cli/main.js"
+  LIST_FILE_PATH="/home/$USER/to-do-cli/list.json"
+
+
   # disregard cmd case
   shopt -s nocasematch
 
@@ -11,23 +20,23 @@
   case "$cmd" in
     'a'*) # add
       if [[ ! -z "$task" ]]; then
-        node main.js "add" "$task"
+        node ${JS_FILE_PATH} ${LIST_FILE_PATH} "add" "$task"
       else
         echo "no task specified"
       fi
       ;;
     'c'*) # clean
-      node main.js "clean"
+      node ${JS_FILE_PATH} ${LIST_FILE_PATH} "clean"
       ;;
     'd'*) # done
       if [[ ! -z "$task" ]]; then
-        node main.js "done" "$task"
+        node ${JS_FILE_PATH} ${LIST_FILE_PATH} "done" "$task"
       else 
         echo "no task specified"
       fi
       ;;
     's'*) # show
-      node main.js "show"
+      node ${JS_FILE_PATH} ${LIST_FILE_PATH} "show"
       ;;
     *) # default
       echo "command not found ..."
