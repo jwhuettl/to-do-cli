@@ -40,6 +40,7 @@ In the future, there are a multitude of things I would like to add to this, such
 2. main.js (js file)
 3. to-do.sh (bash script)
 4. init.sh (installer script)
+5. to-do.conf (configuration file holding both JS and JSON paths)
 
 
 #### Notes

@@ -11,7 +11,7 @@ var file_path;
 function readList() {
   // reads + parses json list
   json_list = fs.readFileSync(file_path);
-  list = JSON.parse(json_list);
+  list = JSON.parse(json_list)
 } // read list
 
 function writeList() {
@@ -65,6 +65,7 @@ function main() {
 
   file_path = args[0]; // getting json list file path
 
+  // if readList() fails, program exits
   readList();
 
   switch (args[1]) {
