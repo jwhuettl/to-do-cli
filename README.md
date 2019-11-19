@@ -17,15 +17,18 @@ Visually it looks like this
       json
 
 #### Functions
-As of right now, the functionality is pretty limited, but it include most of the operations I would use. In the future, I would like to add more functionality like undoing, editing, or completely clearing the list. For now, basic functionality is a limited form of CRUD operations, Create is handled by addTask, Read is showList, there is a limited form of Update with doneTask, and finally a limited form of Delete with clearList. 
+As of right now, the functionality is pretty limited, but it include most of the operations I would use. In the future, I would like to add more functionality like undoing, editing, or completely clearing the list. For now, basic functionality is a limited form of CRUD operations, Create is handled by addTask, Read is showList, there is a limited form of Update with doneTask, and finally a limited form of Delete with clearList. <br />
+There are some helper functions that run each time any operation is done, readList and writeList. Function readList is called everytime as the list needs to be read to complete any operations, it does have some error checking with looking for proper JSON. The other function, writeList is only called on addTask and doneTask, it should work at all times, and will report if a task was not found to match any of those within the list. 
+
 
 1. addTask - add new tasks to the list
 2. cleanList - removes all tasks marked done
 3. doneTask - marks a task as done
 4. showList - prints out the list to the command line
-
  
 > Note: I realize that doneTask makes no gramatical sense, HOWEVER, it does fit the naming scheme of the program. 
+
+In the bash file, there is a fix function (which, for now, deletes the list file and writes the proper JSON to it) to reset up the list based on the file path (LIST_FILE_PATH) given by the config file. 
 
 #### Configuration
 For now, the file paths (main.js & list.json) are hard-coded into the bash script, as variables JS_FILE_PATH and LIST_FILE_PATH respectively. You may set these as you please and place the files where ever you would like, however I would advise you to keep the javascript and the bash in the same folder. 
@@ -35,15 +38,18 @@ In the installer, I have commented out a command to create a bash alias to allow
 In the future, there are a multitude of things I would like to add to this, such as an improved installer that prompts the user to enter where the each of the files will be placed and a config file. Along with this, making a version that uses a GUI would probabibly make to-do more accessable and a bit easier to use. I would also like to add subtasks so that users can break down tasks into smaller ones. 
 
 
+
+
 #### Files
 1. list.json (list file)
 2. main.js (js file)
 3. to-do.sh (bash script)
 4. init.sh (installer script)
+5. to-do.conf (configuration file holding both JS and JSON paths)
 
 
 #### Notes
-1. Make sure that {"tasks":[]} is in the list.json file, otherwise the program will fail. (I will be changing this soon)
+1. Make sure that {"tasks":[]} is in the list.json file, you will receive an error otherwise. 
 2. Longer task names mess with the formatting of showList. 
 3. As of right now,  doneTask() requires that the task name be exactly matched for the task to be completed (again to be changed soon).
 4. As of right now, tasks cannot be deleted however, users may mark the task as done and then run clean to remove it. It is by no means the final way but it works for now. 

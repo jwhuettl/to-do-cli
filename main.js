@@ -11,7 +11,13 @@ var file_path;
 function readList() {
   // reads + parses json list
   json_list = fs.readFileSync(file_path);
-  list = JSON.parse(json_list);
+  try {
+    list = JSON.parse(json_list);
+  } catch (e) {
+    console.log("invalid JSON in list file - run './to-do.sh f' to fix list.json");
+    return false;
+  }
+  return true;
 } // read list
 
 function writeList() {
@@ -54,6 +60,11 @@ function showList() {
   // prints out entire list
 
   console.log('[to-do list]');
+
+  if (list.tasks.length == 0) {
+    console.log("\t--list is currently empty--");
+  }
+
   list.tasks.forEach(element => {
     console.log("%s\t\t\t\t%s", element.name, element.done);
   });
@@ -65,7 +76,10 @@ function main() {
 
   file_path = args[0]; // getting json list file path
 
-  readList();
+  // if readList() fails, program exits
+  if (!(readList())) {
+    return 2;
+  }
 
   switch (args[1]) {
     case 'add':

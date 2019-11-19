@@ -16,5 +16,5 @@ echo {"tasks":[]} > list.json
 
 #
 #  echo "alias todo='PATH/TO/to-do.sh" > /home/.bashrc
-#
+#  source ~/.bashrc
 #

@@ -1,13 +1,15 @@
 #!/bin/bash
 
-  # some configuration stuff
+  config="./to-do.conf"
 
-  # this is the path to the javascript script
-  # eventually I would like to move this to a config file 
-  # default values or if no config file (./main.js and ./list.json)
-  JS_FILE_PATH="/home/$USER/to-do-cli/main.js"
-  LIST_FILE_PATH="/home/$USER/to-do-cli/list.json"
 
+  # reading config file
+  while IFS= read -r path 
+  do
+    JS_FILE_PATH="$path"
+  done < "$config"
+  
+  LIST_FILE_PATH="$path"
 
   # disregard cmd case
   shopt -s nocasematch
@@ -34,6 +36,11 @@
       else 
         echo "no task specified"
       fi
+      ;;
+    'f'*) # fix
+      rm ${LIST_FILE_PATH}
+      touch ${LIST_FILE_PATH}
+      echo '{"tasks":[]}' > ${LIST_FILE_PATH}
       ;;
     's'*) # show
       node ${JS_FILE_PATH} ${LIST_FILE_PATH} "show"
