@@ -37,6 +37,11 @@
         echo "no task specified"
       fi
       ;;
+    'f'*) # fix
+      rm ${LIST_FILE_PATH}
+      touch ${LIST_FILE_PATH}
+      echo '{"tasks":[]}' > ${LIST_FILE_PATH}
+      ;;
     's'*) # show
       node ${JS_FILE_PATH} ${LIST_FILE_PATH} "show"
       ;;
