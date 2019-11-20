@@ -31,20 +31,14 @@ There are some helper functions that run each time any operation is done, readLi
 In the bash file, there is a fix function (which, for now, deletes the list file and writes the proper JSON to it) to reset up the list based on the file path (LIST_FILE_PATH) given by the config file. 
 
 #### Configuration
-For now, the file paths (main.js & list.json) are hard-coded into the bash script, as variables JS_FILE_PATH and LIST_FILE_PATH respectively. You may set these as you please and place the files where ever you would like, however I would advise you to keep the javascript and the bash in the same folder. 
-
-In the installer, I have commented out a command to create a bash alias to allow the script to be run from anywhere in the system and with a shorter command. 
-
-In the future, there are a multitude of things I would like to add to this, such as an improved installer that prompts the user to enter where the each of the files will be placed and a config file. Along with this, making a version that uses a GUI would probabibly make to-do more accessable and a bit easier to use. I would also like to add subtasks so that users can break down tasks into smaller ones. 
-
-
+Configuration is done upon first setup by running the installer (installer.sh) and entering valid paths when asked. I would recommend keeping main.js in the same folder as to-do.sh for ease of use and troubleshooting. The list file can really be placed anywhere. The installer can be rerun at anytime should the user want to, however it will clear the list. 
 
 
 #### Files
 1. list.json (list file)
 2. main.js (js file)
 3. to-do.sh (bash script)
-4. init.sh (installer script)
+4. installer.sh (installer script)
 5. to-do.conf (configuration file holding both JS and JSON paths)
 
 
