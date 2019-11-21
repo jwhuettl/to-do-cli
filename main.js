@@ -1,7 +1,7 @@
 
 const fs = require('fs');
 var list = [];
-var list_copy = {"tasks":[]}; 
+var list_copy = {"tasks":[]};
 
 // filepath for list.json
 var file_path;
@@ -78,7 +78,7 @@ function main() {
 
   // if readList() fails, program exits
   if (!(readList())) {
-    return 2;
+    return 2; // this doesn't actually get used anywhere
   }
 
   switch (args[1]) {

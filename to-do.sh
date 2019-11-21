@@ -1,15 +1,18 @@
 #!/bin/bash
 
-  config="./to-do.conf"
-
-
   # reading config file
-  while IFS= read -r path 
+  declare -a cfg # cfg array
+
+  # reads line by into cfg
+  for line in $(cat config.ini);
   do
-    JS_FILE_PATH="$path"
-  done < "$config"
-  
-  LIST_FILE_PATH="$path"
+    cfg+=($line)
+  done
+
+  # moving cfg to proper vars
+  JS_FILE_PATH=${cfg[0]}
+  LIST_FILE_PATH=${cfg[1]}
+
 
   # disregard cmd case
   shopt -s nocasematch
@@ -33,14 +36,14 @@
     'd'*) # done
       if [[ ! -z "$task" ]]; then
         node ${JS_FILE_PATH} ${LIST_FILE_PATH} "done" "$task"
-      else 
+      else
         echo "no task specified"
       fi
       ;;
     'f'*) # fix
       rm ${LIST_FILE_PATH}
       touch ${LIST_FILE_PATH}
-      echo '{"tasks":[]}' > ${LIST_FILE_PATH}
+      echo {"tasks":[]} > ${LIST_FILE_PATH}
       ;;
     's'*) # show
       node ${JS_FILE_PATH} ${LIST_FILE_PATH} "show"

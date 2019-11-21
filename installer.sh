@@ -6,13 +6,13 @@ chmod +x to-do.sh
 chmod +x main.js
 
 # sets up the to-do list file
-# do not remove this as for now it will not 
-# function without, right now this is for initial 
+# do not remove this as for now it will not
+# function without, right now this is for initial
 # setup, fixing can be done with the (f)ix command
 echo {"tasks":[]} > list.json
 
 # users may move the files to where ever in the system they would like
-# the following code will prompt the user with where they have placed 
+# the following code will prompt the user with where they have placed
 # the files (main.js and list.json)
 
 echo "if left blank, the default is all files located in same directory"
@@ -27,16 +27,17 @@ read LIST_FILE_PATH
 
 if [[ -z "$JS_FILE_PATH" ]] && [[ -z "$LIST_FILE_PATH" ]]; then
   # user has entered nothing, so defaults will be chosen
-  # since 
+  #
   echo "default paths selected"
-else 
+else
   # user has entered custom paths, proceed to path validation
   if [[ -d "$JS_FILE_PATH" ]] && [[ -d "$LIST_FILE_PATH" ]]; then
     echo "valid paths selected writing to config file"
 
-    # writing to config file here 
-    echo ${JS_FILE_PATH}"main.js" > to-do.config
-    echo ${LIST_FILE_PATH}"list.json" >> to-do.config
+    # writing to config file here
+    # writes extra whitespace to file, messing with to-do.sh reads
+    echo ${JS_FILE_PATH}"main.js" > config.ini
+    echo ${LIST_FILE_PATH}"list.json" >> config.ini 
 
   else
     # invalid path found, prompt user to create?
