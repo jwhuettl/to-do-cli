@@ -9,7 +9,7 @@ chmod +x main.js
 # do not remove this as for now it will not
 # function without, right now this is for initial
 # setup, fixing can be done with the (f)ix command
-echo {"tasks":[]} > list.json
+echo '{"tasks":[]}' > list.json
 
 # users may move the files to where ever in the system they would like
 # the following code will prompt the user with where they have placed
@@ -27,7 +27,7 @@ read LIST_FILE_PATH
 
 if [[ -z "$JS_FILE_PATH" ]] && [[ -z "$LIST_FILE_PATH" ]]; then
   # user has entered nothing, so defaults will be chosen
-  #
+
   echo "default paths selected"
 else
   # user has entered custom paths, proceed to path validation
@@ -35,9 +35,13 @@ else
     echo "valid paths selected writing to config file"
 
     # writing to config file here
-    # writes extra whitespace to file, messing with to-do.sh reads
+    # add option to move files to where the user specified
     echo ${JS_FILE_PATH}"main.js" > config.ini
-    echo ${LIST_FILE_PATH}"list.json" >> config.ini 
+    echo ${LIST_FILE_PATH}"list.json" >> config.ini
+
+    # moving files to where ever the use specified
+    # mv main.js ${JS_FILE_PATH}
+    # mv list.json ${LIST_FILE_PATH}
 
   else
     # invalid path found, prompt user to create?

@@ -65,6 +65,8 @@ function showList() {
     console.log("\t--list is currently empty--");
   }
 
+  // TODO: figure out a better way to format
+  //       the task strings to perfect alignment
   list.tasks.forEach(element => {
     console.log("%s\t\t\t\t%s", element.name, element.done);
   });
