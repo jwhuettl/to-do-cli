@@ -61,6 +61,7 @@ function showList() {
 
   console.log('[to-do list]');
 
+  // if the list is empty
   if (list.tasks.length == 0) {
     console.log("\t--list is currently empty--");
   }
@@ -74,7 +75,7 @@ function showList() {
 
 
 function main() {
-  args = process.argv.slice(2);
+  args = process.argv.slice(2); // slicing first two args (we don't need them)
 
   file_path = args[0]; // getting json list file path
 
@@ -83,6 +84,7 @@ function main() {
     return 2; // this doesn't actually get used anywhere
   }
 
+  // add in return values to enable testing/proper error reporting
   switch (args[1]) {
     case 'add':
       addTask(args[2]);
